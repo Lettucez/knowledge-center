@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import './App.css';
 
 import KnowledgeCenterItems from './components/KnowledgeCenterItems/KnowledgeCenterItems';
+import TitleText from './components/TitleText/TitleText';
+import SearchBar from './components/SearchBar/SearchBar';
+
 import initialState from './testState';
 
 const App = (props) => {
@@ -11,13 +14,17 @@ const App = (props) => {
 
 
     return (
-        <div className="section">
-            <div className="container">
-                <KnowledgeCenterItems items={unfilteredKCItems}/>
+        <>
+
+            <div className="section">
+                <div className="container">
+                    <TitleText/>
+                    <SearchBar/>
+                    <hr style={{backgroundColor: "#dbdbdb"}}/>
+                    <KnowledgeCenterItems items={unfilteredKCItems}/>
+                </div>
             </div>
-        </div>
-
-
+        </>
     );
 
 };
