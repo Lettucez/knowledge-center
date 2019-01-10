@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import './App.css';
 
-class App extends Component {
+import KnowledgeCenterItems from './components/KnowledgeCenterItems/KnowledgeCenterItems';
+import initialState from './testState';
+
+const App = (props) => {
+
+    const [unfilteredKCItems, setUnfilteredKCItems] = useState(initialState);
 
 
-
-
-
-  render() {
     return (
-
+        <KnowledgeCenterItems items={unfilteredKCItems}/>
     );
-  }
-}
+
+};
 
 export default App;
