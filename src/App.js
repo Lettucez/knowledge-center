@@ -11,7 +11,13 @@ const App = (props) => {
 
 
     return (
-        <KnowledgeCenterItems items={unfilteredKCItems}/>
+        <div className="section">
+            <div className="container">
+                <KnowledgeCenterItems items={unfilteredKCItems}/>
+            </div>
+        </div>
+
+
     );
 
 };

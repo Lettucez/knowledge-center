@@ -1,7 +1,6 @@
 @import "~bulma/css/bulma.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
 
-main {
-    width: 900px;
-    margin:  100px auto;
+#root {
+    background-color: #eeeeee;
 }

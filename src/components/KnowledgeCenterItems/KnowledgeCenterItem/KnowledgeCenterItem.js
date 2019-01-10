@@ -12,15 +12,25 @@ const images = {
 const KnowledgeCenterItem = (props) => {
 
     return (
-     <div style={{width: 300}} className="column is-one-third">
-        <div className="card">
-            <i className={"fa " + images.type[props.item.type] + " fa-5x"} aria-hidden="true"></i>
-            <div className="card-content">
-                {props.item.title}
+        <div className="column is-one-third">
+            <div style={{width: 300, height: 100}} className="card">
+                <div style={{display: "flex", alignItems: "center"}}>
+                    <div style={{width: 100, height: 100, display:"flex", justifyContent: "center", alignItems: "center", backgroundColor: props.item.type === 'category' ? '#122956' : props.item.type === 'gitbook' ? 'dodgerblue' : props.item.type === 'link' ? 'darkgreen' : 'darkred' }}>
+                        <span className="icon is-large has-text-white">
+                            <i className={"fa " + images.type[props.item.type] + " fa-3x"} aria-hidden="true"></i>
+                    </span>
+                    </div>
+                    <div style={{width: 200, height: 100, display: "flex", alignItems: "center"}}>
+                        <div style={{marginLeft: 10, color: "#122956"}} className="title is-5">
+                            {props.item.title}
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-     </div>
     );
 };
+
 
 export default KnowledgeCenterItem;
