@@ -6,7 +6,6 @@ const KnowledgeCenterItems = (props) => {
 
     return (
         <div className="columns is-multiline">
-
             {props.items.map((item) => {
                 return <KnowledgeCenterItem key={item.id} item={item}/>
             })

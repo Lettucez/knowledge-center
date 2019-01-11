@@ -6,16 +6,16 @@ import KnowledgeCenterItems from './components/KnowledgeCenterItems/KnowledgeCen
 import TitleText from './components/TitleText/TitleText';
 import SearchBar from './components/SearchBar/SearchBar';
 
-import initialState from './testState';
+import initialKnowledgeCenterItems from './testState';
 
 const App = (props) => {
 
-    const [unfilteredKCItems, setUnfilteredKCItems] = useState(initialState);
-
+    const [unfilteredKCItems, setUnfilteredKCItems] = useState(initialKnowledgeCenterItems);
+    const [filteredKCItems, setFilteredKCItems] = useState();
+    const [showHome, setShowHome] = useState(false);
 
     return (
         <>
-
             <div className="section">
                 <div className="container">
                     <TitleText/>
