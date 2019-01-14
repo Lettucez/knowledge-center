@@ -69,6 +69,10 @@ const initialState = [
             {
                 id: 1,
                 title: 'Raiser\'s Edge'
+            },
+            {
+                id: 8,
+                title: 'Reporting'
             }
         ]
     },

@@ -13,7 +13,7 @@ const KnowledgeCenterItem = (props) => {
 
     return (
         <div className="column is-one-third">
-            <div style={{width: 400, height: 100}} className="card">
+            <div style={{width: 400, height: 100}} className="card" onClick={() => { props.click(props.item.id) }}>
                 <div style={{display: "flex", alignItems: "center"}}>
                     <div style={{width: 100, height: 100, display:"flex", justifyContent: "center", alignItems: "center", backgroundColor: props.item.type === 'category' ? '#122956' : props.item.type === 'gitbook' ? 'dodgerblue' : props.item.type === 'link' ? 'darkgreen' : 'darkred' }}>
                         <span className="icon is-large has-text-white">

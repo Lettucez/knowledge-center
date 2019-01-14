@@ -7,7 +7,11 @@ const KnowledgeCenterItems = (props) => {
     return (
         <div className="columns is-multiline">
             {props.items.map((item) => {
-                return <KnowledgeCenterItem key={item.id} item={item}/>
+                if (item.type !== 'category') {
+                    return <KnowledgeCenterItem key={item.id} item={item}/>
+                } else {
+                    return <KnowledgeCenterItem key={item.id} item={item} click={props.categoryClick}/>
+                }
             })
             }
         </div>

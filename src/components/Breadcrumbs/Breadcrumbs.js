@@ -13,8 +13,8 @@ const Breadcrumbs = (props) => {
     return (
         <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
             <ul>
-                {props.showHome && homeIcon}
-                <li>{props.title}</li>
+                {props.categoryName && homeIcon}
+                <li className="is-active"><a>{props.categoryName}</a></li>
             </ul>
         </nav>
     );
