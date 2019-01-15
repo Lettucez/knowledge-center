@@ -21,8 +21,11 @@ const App = (props) => {
     //TODO change function to use axios and get items from drupal
     useEffect(() => {
         setTimeout(() => {
+            const filteredItems = initialKnowledgeCenterItems.filter((item) => {
+                return !item.parentReference.length;
+            });
             setInitialKCItems(initialKnowledgeCenterItems);
-            setFilteredKCItems(initialKnowledgeCenterItems);
+            setFilteredKCItems(filteredItems);
         }, 3000);
     }, []);
 
@@ -33,14 +36,22 @@ const App = (props) => {
         });
         setBreadcrumbCategoryName(category.title);
 
+        //find kc items with parent of clicked category
         const filteredItems = [...initialKCItems].filter((item) => {
-            return item.parentReference.filter((parentRef) => {
+            return item.parentReference.some((parentRef) => {
                 return parentRef.id === kcID;
             });
         });
         setFilteredKCItems(filteredItems);
     };
 
+    const handleHomeBreadcrumbClick = () => {
+        const filteredItems = initialKnowledgeCenterItems.filter((item) => {
+            return !item.parentReference.length;
+        });
+      setFilteredKCItems(filteredItems);
+      setBreadcrumbCategoryName(null);
+    };
 
 
     return (
@@ -50,7 +61,7 @@ const App = (props) => {
                     <TitleText/>
                     <SearchBar/>
                     <hr style={{backgroundColor: "#dbdbdb"}}/>
-                    <Breadcrumbs categoryName={breadcrumbCategoryName}/>
+                    <Breadcrumbs categoryName={breadcrumbCategoryName} homeClick={handleHomeBreadcrumbClick}/>
                     {initialKCItems.length ? <KnowledgeCenterItems items={filteredKCItems} categoryClick={handleCategoryClick}/> : <Spinner/> }
                 </div>
             </div>
