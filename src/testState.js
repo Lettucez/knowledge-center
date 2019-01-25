@@ -1,4 +1,4 @@
-const initialState = [
+const allKCItems = [
     {
         id: 1,
         type: 'category',
@@ -96,4 +96,4 @@ const initialState = [
     }
 ];
 
-export default initialState;
+export default allKCItems;

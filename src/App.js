@@ -8,28 +8,34 @@ import SearchBar from './components/SearchBar/SearchBar';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Spinner from './components/Spinner/Spinner';
 
-import initialKnowledgeCenterItems from './testState';
+import allKCItems from './testState';
 
 const App = (props) => {
 
     //set up app state using hooks
+    //all kc items
     const [initialKCItems, setInitialKCItems] = useState([]);
+    //kc items by category
     const [filteredKCItems, setFilteredKCItems] = useState([]);
+    //breadcrumb name to show
     const [breadcrumbCategoryName, setBreadcrumbCategoryName] = useState(null);
 
     //populate initial Knowledge Center items
     //TODO change function to use axios and get items from drupal
     useEffect(() => {
+        //TODO remove settimeout, only used to mock ajax call for spinner and setting state
         setTimeout(() => {
-            const filteredItems = initialKnowledgeCenterItems.filter((item) => {
+            //get KC items with no parentReference field
+            const filteredItems = allKCItems.filter((item) => {
                 return !item.parentReference.length;
             });
-            setInitialKCItems(initialKnowledgeCenterItems);
+            setInitialKCItems(allKCItems);
             setFilteredKCItems(filteredItems);
         }, 3000);
+
     }, []);
 
-    //filter items based on category selected and set breadcrumbCategory state
+    //filter items based on category selected and set breadcrumbCategoryName state
     const handleCategoryClick = (kcID) => {
         const category = filteredKCItems.find((item) => {
             return item.id === kcID;
@@ -46,11 +52,15 @@ const App = (props) => {
     };
 
     const handleHomeBreadcrumbClick = () => {
-        const filteredItems = initialKnowledgeCenterItems.filter((item) => {
+        const filteredItems = initialKCItems.filter((item) => {
             return !item.parentReference.length;
         });
-      setFilteredKCItems(filteredItems);
-      setBreadcrumbCategoryName(null);
+        setFilteredKCItems(filteredItems);
+        setBreadcrumbCategoryName(null);
+    };
+
+    const handleSearchText = (searchItems) => {
+        setFilteredKCItems(searchItems);
     };
 
 
@@ -59,10 +69,12 @@ const App = (props) => {
             <div className="section">
                 <div className="container">
                     <TitleText/>
-                    <SearchBar/>
+                    <SearchBar initialKC={initialKCItems} filteredItems={filteredKCItems} onSearch={handleSearchText} />
                     <hr style={{backgroundColor: "#dbdbdb"}}/>
                     <Breadcrumbs categoryName={breadcrumbCategoryName} homeClick={handleHomeBreadcrumbClick}/>
-                    {initialKCItems.length ? <KnowledgeCenterItems items={filteredKCItems} categoryClick={handleCategoryClick}/> : <Spinner/> }
+                    {initialKCItems.length ?
+                        <KnowledgeCenterItems items={filteredKCItems} categoryClick={handleCategoryClick}/> :
+                        <Spinner/>}
                 </div>
             </div>
         </>
