@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react';
 
 import './App.css';
 
+//react components
 import KnowledgeCenterItems from './components/KnowledgeCenterItems/KnowledgeCenterItems';
 import TitleText from './components/TitleText/TitleText';
 import SearchBar from './components/SearchBar/SearchBar';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Spinner from './components/Spinner/Spinner';
+
 import Fuse from 'fuse.js';
 
 import allKCItems from './testState';
@@ -39,6 +41,7 @@ const App = (props) => {
     //hold search term
     const [searchTerm, setSearchTerm] = useState('');
 
+    //initialize search package
     const fuse = new Fuse(initialKCItems, options);
 
     //populate initial Knowledge Center items

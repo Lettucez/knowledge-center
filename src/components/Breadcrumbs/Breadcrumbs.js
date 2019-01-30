@@ -6,15 +6,15 @@ const Breadcrumbs = (props) => {
         <nav className="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
             <ul>
                 <li onClick={props.homeClick}>
-                    <a href="#">
+                    <div style={{alignItems: "center", color: "#3273dc", display: "flex", justifyContent: "center", paddingRight: ".75em", cursor: "pointer"}}>
                         <span className="icon is-small">
                             <i className="fa fa-home" aria-hidden="true"></i>
                         </span>
                         <span>Home</span>
-                    </a>
+                    </div>
                 </li>
                 { props.categoryName &&
-                <li className="is-active"><a href="#">{props.categoryName}</a></li>
+                <li className="is-active"><div style={{alignItems: "center", display: "flex", justifyContent: "center", paddingLeft: ".75em"}}>{props.categoryName}</div></li>
                 }
             </ul>
         </nav>
