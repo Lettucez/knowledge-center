@@ -1,8 +1,15 @@
+/**
+ * @file Defines the main app component.
+ * @author Chris Leo
+ */
+
 import React, {useState, useEffect} from 'react';
 
 import './App.css';
 
-//react components
+/**
+ * Custom React Components
+ */
 import KnowledgeCenterItems from './components/KnowledgeCenterItems/KnowledgeCenterItems';
 import TitleText from './components/TitleText/TitleText';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -11,9 +18,16 @@ import Spinner from './components/Spinner/Spinner';
 
 import Fuse from 'fuse.js';
 
+/**
+ * Test State
+ */
 import allKCItems from './testState';
 
-
+/**
+ * Fuse search options.
+ *
+ * @type {{distance: number, minMatchCharLength: number, keys: string[], maxPatternLength: number, threshold: number, location: number, shouldSort: boolean}}
+ */
 const options = {
     shouldSort: true,
     threshold: 0.4,
@@ -27,27 +41,59 @@ const options = {
     ]
 };
 
+/**
+ * Main app component. Created as a functional component for use with react hooks. See
+ * {@link https://reactjs.org/docs/hooks-intro.html}.
+ *
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 const App = (props) => {
 
-    //set up app state using hooks
-    //all kc items
+    /**
+     * Set up application state using hooks.
+     */
+
+    /**
+     * All knowledge center items.
+     */
     const [initialKCItems, setInitialKCItems] = useState([]);
-    //items that are shown, filtered by either top level categories, clicked category, or search term
+
+    /**
+     * Filtered knowledge center items that is passed to child components for display.
+     */
     const [filteredKCItems, setFilteredKCItems] = useState([]);
-    //items that are top level categories only
+
+    /**
+     * Knowledge center items that do not have a parent category. This is the initial state when the app is loaded.
+     */
     const [topLevelKCItems, setTopLevelKCItems] = useState([]);
-    //breadcrumb name to show
+
+    /**
+     * Breadcrumb name to show when a category is clicked for the breadcrumb component.
+     */
     const [breadcrumbCategoryName, setBreadcrumbCategoryName] = useState(null);
-    //hold search term
+
+    /**
+     * Search item to pass to filter function.
+     */
     const [searchTerm, setSearchTerm] = useState('');
 
-    //initialize search package
+    /**
+     * Initialize fuse search.
+     */
     const fuse = new Fuse(initialKCItems, options);
 
-    //populate initial Knowledge Center items
-    //TODO change function to use axios and get items from drupal
+    /**
+     * React hook that populates initial knowledge center items when application is loaded. Same as componentDidMount
+     * lifecycle hook.
+     *
+     * @todo change function to use axios and get items from drupal
+     * @todo remove settimeout function
+     */
     useEffect(() => {
-        //TODO remove settimeout, only used to mock ajax call for spinner and setting state
+
         setTimeout(() => {
             //get KC items with no parentReference field
             const filteredItems = allKCItems.filter((item) => {
@@ -60,7 +106,11 @@ const App = (props) => {
 
     }, []);
 
-    //filter items based on category selected and set breadcrumbCategoryName state
+    /**
+     * Filter items based on category and set breadcrumbCategoryName state.
+     *
+     * @param {number} kcID The knowledge center item id that was clicked on.
+     */
     const handleCategoryClick = (kcID) => {
         const category = filteredKCItems.find((item) => {
             return item.id === kcID;
@@ -76,14 +126,21 @@ const App = (props) => {
         setSearchTerm('');
     };
 
-    //set filtered items to initial items with no parentRef field
+    /**
+     * Set filtered items to knowledge center items with no parent reference field (uses state variable
+     * topLevelKCItems).
+     */
     const handleHomeBreadcrumbClick = () => {
         setFilteredKCItems(topLevelKCItems);
         setBreadcrumbCategoryName(null);
         setSearchTerm('');
     };
 
-    //handle search
+    /**
+     * Set filtered state based on search term. Resets state to initial state when search is blank.
+     *
+     * @param event Html input event object.
+     */
     const handleSearchTerm = (event) => {
         setSearchTerm(event.target.value);
         setFilteredKCItems(fuse.search(event.target.value));
@@ -91,7 +148,6 @@ const App = (props) => {
             setFilteredKCItems(topLevelKCItems);
         }
     };
-
 
     return (
         <>

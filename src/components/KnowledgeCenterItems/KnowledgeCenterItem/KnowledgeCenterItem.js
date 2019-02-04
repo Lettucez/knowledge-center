@@ -3,7 +3,7 @@ import styles from './KnowledgeCenterItem.module.css';
 
 const images = {
     type: {
-        category: 'fa-area-chart',
+        category: 'fa-list-alt',
         gitbook: 'fa-book ',
         link: 'fa-link',
         video: 'fa-video-camera'

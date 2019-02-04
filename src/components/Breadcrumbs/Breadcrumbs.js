@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * Breadcrumb component.
+ *
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 const Breadcrumbs = (props) => {
 
     return (
