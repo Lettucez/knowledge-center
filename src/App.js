@@ -139,7 +139,7 @@ const App = (props) => {
     /**
      * Set filtered state based on search term. Resets state to initial state when search is blank.
      *
-     * @param event Html input event object.
+     * @param {Object} event Html input event object.
      */
     const handleSearchTerm = (event) => {
         setSearchTerm(event.target.value);
