@@ -6,7 +6,7 @@ const images = {
         category: 'fa-list-alt',
         gitbook: 'fa-book ',
         link: 'fa-link',
-        video: 'fa-video-camera'
+        video: 'fa-video'
     }
 };
 
@@ -26,12 +26,12 @@ const KnowledgeCenterItem = (props) => {
     }
 
     return (
-        <div className="column is-one-third">
-            <div style={{height: 100, cursor: 'pointer'}} className={'card ' + styles["Scale-up-center"]} onClick={() => { functionAction() }}>
+        <div className={'column is-one-third ' + styles.Grow}>
+            <div style={{height: 100, cursor: 'pointer', margin: "5px"}} className={'card ' + styles["Scale-up-center"]} onClick={() => { functionAction() }}>
                 <div style={{display: "flex", alignItems: "center"}}>
                     <div style={{width: 100, height: 100, minWidth: 100, display:"flex", justifyContent: "center", alignItems: "center", backgroundColor: props.item.type === 'category' ? '#122956' : props.item.type === 'gitbook' ? 'dodgerblue' : props.item.type === 'link' ? 'darkgreen' : 'darkred' }}>
                         <span className="icon is-large has-text-white">
-                            <i className={"fa " + images.type[props.item.type] + " fa-3x"} aria-hidden="true"></i>
+                            <i className={"fas " + images.type[props.item.type] + " fa-3x"} aria-hidden="true"></i>
                     </span>
                     </div>
                     <div style={{height: 100, display: "flex", alignItems: "center"}}>

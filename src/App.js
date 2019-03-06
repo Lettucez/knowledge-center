@@ -17,6 +17,7 @@ import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Spinner from './components/Spinner/Spinner';
 
 import Fuse from 'fuse.js';
+import axios from 'axios';
 
 /**
  * Test State
@@ -81,19 +82,47 @@ const App = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     /**
-     * Initialize fuse search.
+     * Will be Fuse instance containing knowledge center items as the search data when the axios call succeeds.
+     *
+     * @type {Fuse}
      */
     const fuse = new Fuse(initialKCItems, options);
 
     /**
-     * React hook that populates initial knowledge center items when application is loaded. Same as componentDidMount
-     * lifecycle hook.
+     * React hook that populates initial knowledge center items when application is loaded. Same/very similar as the componentDidMount
+     * lifecycle hook attached to react classes.
      *
-     * @todo change function to use axios and get items from drupal
-     * @todo remove settimeout function
+     * Calls the an endpoint for all knowledge center entities. Filters through the entities to find the ones without a parent reference.
+     * The ones returned are then considered the top level categories that are shown when app first loads.
+     *
+     * First: set the initial knowledge center items with setInitialKCItems() inside of the .then() method
+     * (this will be all of the knowledge center entities).
+     *
+     * Second: set the top level knowledge center items (should just be categories with no parent category) with setTopLevelKCItems().
+     *
+     * Finally, we set the filtered knowledge center items, (which on app load should be same as the top level knowledge center items)
+     * with setFilteredKCItems().
+     *
+     * We pass in an empty array as the second argument to useEffect() so it only gets called once, on app load.
      */
     useEffect(() => {
 
+        // use in production
+        // this assumes you are getting back a dataset array that is wrapped in an object with the property of "entities"
+        // axios.get('api/endpoint/data').then((items) => {
+        //     const filteredItems = items.data.entities.filter((item) => {
+        //         return !item.parentReference.length;
+        //     });
+        //
+        //     setInitialKCItems(items.data.entities);
+        //     setTopLevelKCItems(filteredItems);
+        //     setFilteredKCItems(filteredItems);
+        //
+        // }).catch((error) => {
+        //     console.error(error);
+        // });
+
+        //mock timeout for ajax call to show spinner before items get returned
         setTimeout(() => {
             //get KC items with no parentReference field
             const filteredItems = allKCItems.filter((item) => {
@@ -144,6 +173,7 @@ const App = (props) => {
     const handleSearchTerm = (event) => {
         setSearchTerm(event.target.value);
         setFilteredKCItems(fuse.search(event.target.value));
+        setBreadcrumbCategoryName(null);
         if (event.target.value === '') {
             setFilteredKCItems(topLevelKCItems);
         }
