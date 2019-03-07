@@ -15,7 +15,7 @@ const Breadcrumbs = (props) => {
                 <li onClick={props.homeClick}>
                     <div style={{alignItems: "center", color: "#3273dc", display: "flex", justifyContent: "center", paddingRight: ".75em", cursor: "pointer"}}>
                         <span className="icon is-small">
-                            <i className="fa fa-home" aria-hidden="true"></i>
+                            <i className="fas fa-home" aria-hidden="true"></i>
                         </span>
                         <span>Home</span>
                     </div>
